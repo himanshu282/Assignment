@@ -1,0 +1,35 @@
+import java.util.regex.*;
+public class Main
+
+{
+
+	public static boolean
+	isValidURL(String url)
+	{
+		
+		String str = "((http|https)://)(www.)?"
+			+ "[a-zA-Z0-9@:%._\\+~#?&//=]"
+			+ "{2,256}\\.[a-z]"
+			+ "{2,6}\\b([-a-zA-Z0-9@:%"
+			+ "._\\+~#?&//=]*)";
+
+		
+		Pattern p = Pattern.compile(str);
+
+
+		if (url == null) {
+			return false;
+		}
+		Matcher m = p.matcher(url);
+		return m.matches();
+	}
+	public static void main(String args[])
+	{
+		String url = "https://www.google.com";
+		if (isValidURL(url) == true) {
+			System.out.println("valid");
+		}
+		else
+			System.out.println("invalid");
+	}
+}

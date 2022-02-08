@@ -1,0 +1,65 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+public class Main {
+    static int a,e,i,o,u, count1;
+
+    static boolean isNameValid(String Name)
+    {
+        int index = 0, index1 = 0;
+        char[] ch = Name.toCharArray();
+        for (int i = 0; i< ch.length; i++)
+        {
+            if (ch[i] == 'S')
+            {
+                index= i;
+                count1++;
+                break;
+            }
+        }
+        for (int i = ch.length-1; i > 0; i--) 
+        {
+            if (ch[i] == 'S')
+            {
+                index1 = i;
+                count1++;
+                break;
+            }
+        }
+        for (int i = 0; i < ch.length; i++)
+        {
+            if(ch[i] == 'a')
+                a++;
+            if(ch[i] == 'e')
+                e++;
+            if(ch[i] == 'i')
+                i++;
+            if(ch[i] == 'o')
+                o++;
+            if(ch[i] == 'u')
+                u++;
+            if (a > 1 || e >1 || i >1 || o >1 || u > 1)
+                return false;
+            if (count1 == 2)
+            {
+                for (int j = index; j<=index1; j++)
+                {
+                if (ch[i] =='T')
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static void main(String args[])
+    {
+        boolean result = isNameValid("himSqaafhS");
+        System.out.println(result);
+    }
+    
+}
+
