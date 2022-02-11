@@ -1,0 +1,33 @@
+import java.io.*;
+class Main 
+{
+ 
+    static boolean matchTarget(int[][] matrix,int target){
+        int row = matrix.length-1;
+        int col=matrix[0].length-1;
+        int i=0,j=col;    
+        while((i>=0 && i<=row) && (j>=0 && j<= col)){
+            int currentElement = matrix[i][j];
+            if(target == currentElement)    
+                return true;
+            if(target > currentElement)
+                i++;
+            else    
+                j--;
+        }
+        return false;
+    }
+ 
+    public static void main(String args[])
+
+    {
+        int mat[][] = { { 1, 2, 3, 4 },
+                        { 5, 6, 7, 8 },
+                        { 9, 10, 11, 12 } };
+        
+        if(matchTarget(mat,16))
+            System.out.println("Target value is found");
+        else
+            System.out.println("Target value is not found");
+    }
+}
