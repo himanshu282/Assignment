@@ -1,0 +1,40 @@
+public class Main
+{   static int [][]clockwiseArray(int arr[][]){
+    int dir=0;
+    int L=0;
+    int R=arr[0].length-1;
+    int T=0;
+    int B=arr.length-1;
+    while (L<=R && T<=B){
+        if (dir== 0) {
+        for (int k = L;k<=R;k++)
+            System.out.println((arr[T][k]));
+        T++;}
+        else if (dir == 1){
+        for (int k = T;k<=B;k++)
+            System.out.println((arr[k][R])); 
+        R--;
+        }
+        else if (dir== 2) {
+        for (int k = R;k>=L;k--)
+            System.out.println((arr[B][k]));
+        B--;
+        }
+        else if (dir == 3) {
+        for (int k = B;k>=T;k--) 
+            System.out.println((arr[k][L]));
+        L++;
+        }
+         dir = (dir+1) %4;
+        }
+        return arr;
+    }
+	public static void main(String[] args) {
+		int arr[][] = {
+		    {1, 2, 3},
+		    {4, 5, 6 },
+		    {7, 8, 9}
+		};
+		clockwiseArray(arr);
+	}
+}
