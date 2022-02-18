@@ -1,0 +1,116 @@
+interface company {
+    String company_name = "Big Oh";
+}
+class Inverter implements company
+{   
+    int current,operating_voltage;
+    Inverter(int current,int operating_voltage){
+        this.current = current;
+        this.operating_voltage = operating_voltage;
+    }
+    
+        void powerRating(int current,int operating_voltage){
+        System.out.println("Power Rating: " +current * operating_voltage); 
+    }
+    
+    void displayDetails(){
+        System.out.println("Current:" + current + " Operating Voltage:" + operating_voltage);
+        powerRating(current,operating_voltage);
+    }
+  
+}
+class Non_Solar_Inverter extends Inverter {
+    int normal_battery;
+    
+    Non_Solar_Inverter(int current,int operating_voltage,int normal_battery) {
+        super(current,operating_voltage);
+        this.normal_battery=normal_battery;
+    }
+    
+    void displayDetails(){
+        System.out.println("Battery of normal inverter:" +normal_battery +"Ah");
+        super.displayDetails();
+    }
+}
+
+class Solar_Inverter extends Inverter
+{
+  String solar_panels;
+
+  Solar_Inverter(int current,int operating_voltage,String solar_panels){
+      super(current,operating_voltage);
+      this.solar_panels = solar_panels;
+  }
+  
+  void displayDetails(){
+      System.out.println("Solar Panel:" + solar_panels);
+      super.displayDetails();
+  }
+}
+
+class With_Battery extends Solar_Inverter
+{
+  // doesn't have grid on
+  // battery is there and also store energy
+  int battery = 0,energy_produced;
+  
+  With_Battery(int current,int operating_voltage,String solar_panels,int energy_produced){
+      super(current,operating_voltage,solar_panels);
+      this.energy_produced=energy_produced;
+  }
+  
+  void storeEnergy(){
+      if(energy_produced > 0){
+          System.out.println("Energy will be stored in the battery");
+          battery += energy_produced;
+          System.out.println("Energy stored : "+battery);
+      }
+  }
+  
+  void displayDetails(){
+      storeEnergy();
+      super.displayDetails();
+  }
+  
+}
+
+class Without_Battery extends Solar_Inverter
+{
+  // grid on where you can sell extra energy
+  // no battery
+  int energy,max_capacity;
+  Without_Battery(int current,int operating_voltage,String solar_panels, int energy,int max_capacity){
+      super(current,operating_voltage,solar_panels);
+      this.energy=energy;
+      this.max_capacity=max_capacity;
+      
+  }
+  
+  void gridOn_capacity() {
+      if(energy > max_capacity) {
+          
+          int extra_energy = energy - max_capacity;
+          System.out.println("Difference of energy and max capacity :" + extra_energy);
+      }
+  }
+  void displayDetails(){
+      System.out.println("Company Name:" +company_name);
+      System.out.println("Energy:" + energy + " , Max Capacity:"  + max_capacity );
+      gridOn_capacity();
+      super.displayDetails();
+  }
+}
+
+public class Main
+{
+  public static void main (String[]args)
+  {
+    Without_Battery wob = new Without_Battery(2,2,"GTI",100,20);
+    wob.displayDetails();
+    With_Battery wb = new With_Battery(2,2,"PCU",100);
+    wb.displayDetails();
+    Non_Solar_Inverter ns = new Non_Solar_Inverter(2,3,1000);
+    ns.displayDetails();
+  }
+}
+

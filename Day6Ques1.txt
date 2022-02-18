@@ -1,0 +1,107 @@
+
+interface Person {
+    String carType = "Sedan";
+}
+class MP implements Person {
+    String name;
+    String post;
+    int moneySpent;
+    int spendingLimit;
+    String driverName;
+    String constituencyName;
+    
+    MP(String name,String post, int moneySpent, int spendingLimit,String driverName, String constituencyName){
+        this.name = name;
+        this.post=post;
+        this.moneySpent=moneySpent;
+        this.spendingLimit=spendingLimit;
+        this.driverName = driverName;
+	    this.constituencyName = constituencyName;
+    }
+    
+    void getConstituency(){
+	    System.out.println("The name of constituency is "+constituencyName);
+	}
+	
+	void getDriver(){
+	    System.out.println("Name of the driver is " +driverName);    
+	}
+	
+	boolean exceedsSpendingLimit(){
+	   if(moneySpent>spendingLimit)
+	    return true;
+	   return false;
+	}
+	
+    void displayDetails(){
+       System.out.println("Name is " +name +" and spending limit is " +spendingLimit );
+       System.out.println("Car Type is " +carType);
+	   getConstituency();
+	   getDriver();
+	   if(exceedsSpendingLimit())
+	    System.out.println("Exceeds Spending Limit");
+	   else 
+	    System.out.println("Doesn't Exceeds Spending Limit"); 
+    }
+}
+
+class Minister extends MP {
+    Minister(String name,String post,int moneySpent, int spendingLimit,String driverName,String constituencyName){
+        super(name,post,moneySpent,spendingLimit,driverName,constituencyName);
+    }
+    void displayDetails(){
+        System.out.println("Minister start");
+        super.displayDetails();
+    }
+}
+
+class PM extends Minister{
+    String aircraftModel;
+    boolean givePermission;
+    PM(String name,String post,int moneySpent, int spendingLimit,String driverName,String constituencyName,boolean givePermission,String aircraftModel){
+        super(name,post,moneySpent,spendingLimit,driverName,constituencyName);
+        this.givePermission=givePermission;
+        this.aircraftModel = aircraftModel;
+    }
+    
+    void displayDetails(){
+        System.out.println("Aircraft Model is " +aircraftModel);
+        super.displayDetails();
+    }
+}
+
+    class Commissioner {
+        MP mp;
+        Minister mini;
+        PM pm;
+        // String post = "Minister";
+        
+        boolean givePermission = false;
+        void canArrest(PM pm){
+            this.pm =pm;
+            // this.mini=mini;
+            // this.mp=mp;
+            if(pm.post=="PM"){
+                System.out.println("Can't be arrested");
+            }
+            else if(pm.post == "Minister"){
+                if(pm.givePermission){
+                    System.out.println("Can be arrested");
+                }
+                else{
+                    System.out.println("Can't be arrested");
+                }
+            }
+            else if(pm.post=="MP")
+                System.out.println("Arrest");
+        }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		PM min = new PM("Himanshu","Minister",100000,10000,"ABC","Gurgaon",false,"Airbus 300");
+		min.displayDetails();
+        Commissioner com = new Commissioner();
+        com.canArrest(min);
+	}
+}

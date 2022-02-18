@@ -1,0 +1,148 @@
+
+class Users{
+    
+    Status sta;
+    Contacts con;
+    void showContact(Contacts con){
+        this.con=con;
+        // con.setName("ABC");
+        System.out.println(con.getName());
+        // con.setMobileNumber(3333333);
+        System.out.println(con.getMobileNumber());
+    
+    }
+    
+    void display(Status sta){
+        this.sta=sta;
+        sta.post();    
+    }
+    
+}
+
+class Contacts{
+    String name;
+    int mobileNumber;
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    
+    public int getMobileNumber(){
+        return mobileNumber;
+    }
+    public void setMobileNumber(int mobileNumber){
+        this.mobileNumber=mobileNumber;
+    }
+}
+
+
+class Messages{
+    boolean send , seen;
+    Messages(boolean send , boolean seen) {
+        this.send=send ;
+        this.seen=seen;
+    }
+}
+
+class Text extends Messages{
+    String text;
+    Text(boolean send, boolean seen, String text){
+        super(send,seen);
+        this.text = text;
+    }
+    void display(){
+        System.out.println("Text Message");
+    }
+}
+
+
+class Audio extends Messages{
+    String audioName;
+    Audio(boolean send, boolean seen, String audioName){
+        super(send,seen);
+        this.audioName=audioName;
+    }
+    void display(){
+        System.out.println("Audio Message");
+    }
+}
+
+class Video extends Messages{
+    String videoName;
+    Video(boolean send,boolean seen,String videoName){
+        super(send,seen);
+        this.videoName=videoName;
+    }
+    void display(){
+        System.out.println("Video Message");
+    }
+}
+
+class Status{
+    boolean postStatus , viewStatus;
+    Status(boolean postStatus,boolean viewStatus){
+        this.postStatus=postStatus;
+        this.viewStatus=viewStatus;
+    }
+    void post(){
+    if(postStatus)
+        System.out.println("Status posted");
+    else
+        System.out.println("Status not posted");
+    }
+    
+    void view(){
+    if(viewStatus)
+        System.out.println("Status viewed");
+    else
+        System.out.println("Status not viewed");
+    }
+}
+
+class TextStatus extends Status{
+    String statusText;
+    TextStatus(boolean postStatus,boolean viewStatus,String statusText){
+        super(postStatus,viewStatus);
+        this.statusText=statusText;
+    }
+    void show(){
+        System.out.println(statusText);
+    }
+}
+
+class ImageStatus extends Status{
+    String imageLink;
+    ImageStatus(boolean postStatus,boolean viewStatus,String imageLink){
+        super(postStatus,viewStatus);
+        this.imageLink=imageLink;
+    }
+    void show()   {
+        System.out.println(imageLink);
+    }
+}
+
+
+
+public class Main
+{
+	public static void main(String[] args) {
+	    
+		ImageStatus is = new ImageStatus(false,true,"hello.jpg");
+		is.show();
+		is.post();
+		is.view();
+		Status sta = new Status(true,true);
+		
+		Contacts con =new Contacts();
+		con.setName("Himanshu");
+		System.out.println(con.getName());
+		con.setMobileNumber(111111111);
+		System.out.println(con.getMobileNumber());
+		Users use =new Users();
+		use.display(sta);
+		use.showContact(con);
+	}
+}
+ 

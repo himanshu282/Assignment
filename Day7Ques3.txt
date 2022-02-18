@@ -1,0 +1,18 @@
+class PersonalDetails {
+    String firstName = "John";
+    String lastName = "Smith";
+    int age = 25;
+    Address address;
+    Map<String,String> phoneNumbers = new HashMap<String,String>();
+        phoneNumbers.put("type","home");
+        phoneNumbers.put("number","212 555-1234"); 
+        phoneNumbers.put("type","fax");
+        phoneNumbers.put("number","646 555-4567"); 
+} 
+
+class Address {
+    String streetAddress = "21 2nd Street" ; 
+    String city = "New York";
+    String state = "NY";
+    int postalCode = 10021;
+}

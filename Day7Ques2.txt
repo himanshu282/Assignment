@@ -1,0 +1,21 @@
+JSON ={
+    "Employee" = {
+        "name" : "Himanshu",
+        "salary" : 10000,
+        "married" : false,
+        "grade" : null,
+        "address" : {
+            "primaryAddress" : "Gurgaon",
+            "secondaryAddress" : "Noida",
+            "country" : "India",
+            "state" : "Haryana"
+        },
+        "mobileNumbers" : ["11111111","222222222","333333333"],
+        "address" : {
+            "primaryAddress" : "Gurgaon",
+            "secondaryAddress" : "Noida",
+            "country" : "India",
+            "state" : "Haryana"
+        }
+    }
+}
