@@ -1,0 +1,161 @@
+// You have to create a program for ATM Which would have certain defined denominations of notes 
+// : 100 ,200, 500, and 2000 INR.
+// Now you have to design your ATM in such a way that at any time ATM can be top-up with any 
+// required domination like I can add 41000 as (2000 x 20) + (500 x 2) notes
+// Your ATM should have a function to withdraw cash , input can be any amount:
+// Use cases for withdraw as below:
+// 1: if amount is not present show error insufficient balance
+// 2: if amount is not in the factor of available denominations show error to ask for multiple of
+// available denomination
+// 3: first largest denomination should be used than smaller : like if I opt for 2300 rs, amount 
+// dispatched should be (2000 x 1 ) + (200 x 1) + (100 x 1)
+// 3.b: if any denomination is not there like suppose you don’t have 2000 notes left in ATM , then, 
+// amount dispatched should be (500 x 4) +  (200 x 1) + (100 x 1)
+// Next step: it can be done by Modi Ji, that older denomination is not valid in case of demonetization, 
+// like 2000 Notes are banned and new 5000 notes are legal , so you code should be like you 
+// don’t need to change much of it, 
+// Try to achieve OOPS , and SOLID principles as much as you can, 
+// Also, we will add new use cases to see whether your system can adapt to those changes. 
+// If Not, then your design is bad. (SOLID,TRY,YAGNI,KISS)
+
+import java.util.Scanner;
+class Currency{
+    static int twoThousand = 2000;
+    static int fiveHundred=500;
+    static int twohundred = 200;
+    static int onehundred=100;
+    static int twoThousandCount , fiveHundredCount, twohundredCount, onehundredCount;
+}
+
+class Bank{
+    int balance,accNo;
+    Bank(int balance, int accNo){
+        this.balance=balance;
+        this.accNo=accNo;
+    }
+    
+    void addMoney(int amount){
+        balance += amount;
+    }
+    
+    void debitMoney(int amount){
+        balance -= amount;
+    }
+}
+
+class WithdrawCash{
+    int amount;
+    int twoThousandNote = 0, fiveHundredNote = 0, twoHundredNote = 0, oneHundredNote = 0;
+    int cashPresent = Currency.oneHundred * Currency.oneHundredCount +
+            Currency.twoHundred * Currency.twoHundredCount +
+            Currency.fiveHundred * Currency.fiveHundredCount +
+            Currency.twoThousand * Currency.twoThousandCount;
+    void withdraw(int amount){
+        this.amount=amount;
+        if(amount > cashPresent){
+            System.out.println("Insufficient balance");
+            return;
+        }
+        
+        twoThousandNote = amount/Currency.twoThousand;
+        if(amount/Currency.twoThousand != 0){
+            amount= amount%Currency.twoThousand;
+        }
+        
+        fiveHundredNote=amount/Currency.fiveHundred;
+        if(amount/Currency.fiveHundred != 0){
+            amount= amount % Currency.fiveHundred; 
+        }
+        
+        twoHundredNote=amount/Currency.twohundred;
+        if(amount/Currency.twohundred != 0){
+            amount=amount%Currency.twohundred;
+        }
+        
+        oneHundredNote =amount/Currency.onehundred;
+        if(amount/amount%Currency.onehundred != 0){
+            amount=amount%Currency.onehundred;
+        }
+    }
+}
+
+class BalanceCheck {
+    private Bank user;
+    private int amount;
+    BalanceCheck(Bank user, int amount) {
+        this.amount = amount;
+        this.user = user;
+    }
+    void verify() {
+        if (user.balance < amount) {
+            System.out.println("Insufficiant balance on your bank account");
+            return;
+        }
+        withdrawCash withdrawc = new withdrawCash();
+        user.balance -= amount;
+        withdrawCash.withdraw(amount);
+    }
+}
+
+class ATM {
+    Bank user;
+    int topUpAmount;
+    void punchCard(int topUpAmount,Bank user){
+        this.user=user;
+        this.topUpAmount=topUpAmount;
+    }
+   void withdrawCash() {
+        BalanceCheck bal = new BalanceCheck(user, topUpAmount);
+        bal.verify();
+    }
+}
+
+class addMoneyATM {
+    void addTwoThousand(int notesQuantity)   {
+        Currency.twoThousandCount += notesQuantity;
+    }
+    void addFiveHundred(int notesQuantity)   {  
+        Currency.fiveHundredCount += notesQuantity;
+    }
+    void addTwoHundred(int notesQuantity)   {
+        Currency.twohundredCount += notesQuantity;
+    }
+    void addOneHundred(int notesQuantity)   {
+        Currency.onehundredCount += notesQuantity;
+    }
+    
+}
+
+class PM {
+
+    void changeTwoThousand(int newCount) {
+        Currency.twoThousand = newCount;
+    }
+    
+    void changeFiveHundred(int newCount) {
+        Currency.fiveHundred = newCount;
+    }
+    
+    void changeTwoHundred(int newCount) {
+        Currency.twoHundred = newCount;
+    }
+    
+    void changeOneHundred(int newCount) {
+        Currency.oneHundred = newCount;  
+    }
+  
+
+}
+public class Main
+{
+    static int balance= 5000;
+    
+    
+  public static void main (String[]args)
+  {
+    Main m = new Main();
+    Scanner sc = new Scanner(System.in);
+    int withrawAmount = sc.nextInt();
+    m.withdrawCash(withrawAmount);
+  }
+}

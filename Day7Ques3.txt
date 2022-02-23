@@ -3,11 +3,7 @@ class PersonalDetails {
     String lastName = "Smith";
     int age = 25;
     Address address;
-    Map<String,String> phoneNumbers = new HashMap<String,String>();
-        phoneNumbers.put("type","home");
-        phoneNumbers.put("number","212 555-1234"); 
-        phoneNumbers.put("type","fax");
-        phoneNumbers.put("number","646 555-4567"); 
+    Map<String,String> phoneNumbers;
 } 
 
 class Address {
